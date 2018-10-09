@@ -1,0 +1,48 @@
+{
+  "name": "zivver-test",
+  "version": "1.0.0",
+  "description": "Basic Gherkin demo for Zivver",
+  "homepage": "https://github.com/Phoib/zivvertest",
+  "scripts": {
+    "clean": "read -p \"Are you sure you want to clean the project? [y/n] \" REPLY; if [[ $REPLY =~ ^[Yy]$ ]]; then rm -R .git .github demo-app test .codeclimate.yml .travis.yml jest.json wdio.BUILD.conf.js src/features/**; fi",
+    "local-webserver": "forever start --minUptime 1000 --spinSleepTime 1000 -s ./node_modules/.bin/http-server ./demo-app -s",
+    "test": "npm run test:features",
+    "test:features": "npm run local-webserver & (wdio tests/wdio.conf.js; wdio_ret=$?; forever stopall; exit $wdio_ret)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Phoib/zivvertest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/webdriverio/cucumber-boilerplate/issues"
+  },
+  "keywords": [
+    "webdriverio",
+    "cucumber",
+    "test",
+    "selenium"
+  ],
+  "author": "Emiel Suilen <emiel.suilen@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "~1.7.0",
+    "babel-register": "~6.26.0",
+    "chai": "~4.1.2",
+    "wdio-cucumber-framework": "~2.2.0",
+    "wdio-phantomjs-service": "~0.2.2",
+    "wdio-selenium-standalone-service": "~0.0.9",
+    "wdio-spec-reporter": "~0.1.2",
+    "webdriverio": "4.13.2"
+  },
+  "devDependencies": {
+    "babel-core": "~6.26.3",
+    "babel-jest": "~23.0.1",
+    "babel-polyfill": "~6.26.0",
+    "eslint": "~5.0.0",
+    "eslint-config-airbnb-base": "~13.0.0",
+    "eslint-plugin-import": "~2.13.0",
+    "forever": "~0.15.3",
+    "http-server": "~0.11.0",
+    "jest": "~23.0.0"
+  }
+}
